@@ -27,11 +27,11 @@
 
 ### 5 - Docker
 - docker run hello-word: download "hello-world" image and run its container
-- docker ps: list containers
-- docker ps -a: list containers, even stopped ones
+- docker ps: list running containers
+- docker ps -a: list all containers
 - docker run -p 8080:80 nginx: through localhost:8080 we access port 80 of nginx
 - docker rm b829389238j: remove container id b829389238j
-- docker ps -aq: list container ids, including closed ones
+- docker ps -aq: list all container ids
 - docker rm $(docker ps -aq): remove all containers
 - docker images: list all images
 - docker rmi $(docker images -aq): delete all images
