@@ -1,9 +1,8 @@
-const { response } = require('express');
 const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-    response.send("PFA docker");
+    res.send("PFA docker");
 })
 
 app.listen(3000, () => {
