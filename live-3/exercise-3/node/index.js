@@ -20,20 +20,20 @@ const app = express();
 
 app.get('/', (_, res) => {
     res.send('Hello world');
-    // conn.query(express.query, (err, results) => {
-    //     if (err) {
-    //         console.error(err);
-    //         res.json({
-    //             success: false,
-    //             message: 'An error ocurred'
-    //         });
-    //         return;
-    //     }
-    //     res.json({
-    //         success: true,
-    //         results
-    //     })
-    // })
+    conn.query(express.query, (err, results) => {
+        if (err) {
+            console.error(err);
+            res.json({
+                success: false,
+                message: 'An error ocurred'
+            });
+            return;
+        }
+        res.json({
+            success: true,
+            results
+        })
+    })
 })
 
 app.listen(3000, () => {
