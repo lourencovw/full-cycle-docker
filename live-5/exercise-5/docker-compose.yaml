@@ -1,29 +1,28 @@
 version: '3'
 
 services:
-  pfa-mysql:
-    container_name: pfa-mysql
+  mysql:
     build: ./mysql
     volumes:
       - ./db:/var/lib/mysql
       - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - MYSQL_PASSWORD_ROOT=root
-  pfa-node:
-    container_name: pfa-node
+  node:
     build: ./node
+    entrypoint: dockerize -wait tcp://mysql:3306 node index.js
     volumes:
       - ./node:/home/node/app
       - /home/node/app/node_modules
     environment:
       - MYSQL_PASSWORD_ROOT=root
     depends_on:
-      - pfa-mysql
-  pfa-nginx:
-    container_name: pfa-nginx
+      - mysql
+  nginx:
     build: ./nginx
+    entrypoint: dockerize -wait tcp://node:3000 nginx -g 'daemon off;'
     ports:
       - 8080:80
     depends_on:
-      - pfa-node
+      - node
   
